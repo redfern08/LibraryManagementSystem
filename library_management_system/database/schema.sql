@@ -1,0 +1,24 @@
+CREATE TABLE Books (
+    BookID INTEGER PRIMARY KEY,
+    Title TEXT NOT NULL,
+    Author TEXT NOT NULL,
+    Genre TEXT,
+    IsAvailable BOOLEAN DEFAULT 1
+);
+
+CREATE TABLE Members (
+    MemberID INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    Email TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE Loans (
+    LoanID INTEGER PRIMARY KEY,
+    BookID INTEGER NOT NULL,
+    MemberID INTEGER NOT NULL,
+    LoanDate DATE DEFAULT (DATE('now')),
+    DueDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
